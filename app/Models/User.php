@@ -14,15 +14,20 @@ class User extends Authenticatable
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable, Uuid;
 
+    public $incrementing = false;
+    protected $keyType = 'string';
+
     /**
      * The attributes that are mass assignable.
      *
      * @var list<string>
      */
     protected $fillable = [
-        'name',
+        'nama',
         'email',
         'password',
+        'telepon',
+        'roles',
     ];
 
     /**
@@ -50,6 +55,6 @@ class User extends Authenticatable
 
     public function Penugasan()
     {
-        return $this->hasMany(User::class, 'user_id', 'id');
+        return $this->hasMany(Penugasan::class, 'user_id', 'id');
     }
 }

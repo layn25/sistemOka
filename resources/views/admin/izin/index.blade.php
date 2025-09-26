@@ -62,7 +62,7 @@
             <div class="col-md-6">
                 <div class="position-relative">
                     <input type="text" class="form-control" id="izinInput" placeholder="Cari pegawai..."
-                           style="padding-right: 40px;">
+                        style="padding-right: 40px;">
                     <button class="btn btn-link position-absolute end-0 top-50 translate-middle-y pe-3" type="button">
                         <i class="bi bi-search text-muted"></i>
                     </button>

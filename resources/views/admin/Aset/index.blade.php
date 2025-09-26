@@ -10,20 +10,10 @@
                     "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
                     "language": {
                         "search": "",
-                        "searchPlaceholder": "Cari users...",
+                        "searchPlaceholder": "Cari...",
                     },
-                    "dom": 'rt<"d-flex justify-content-between align-items-center mt-2"lip>',
+                    "dom": 'rt<"d-flex justify-content-between align-items-center"lip>',
                     "order": [[0, 'asc']]
-                });
-                // Petugas filter functionality
-                $('#rolesFilter').on('change', function () {
-                    const selectedPetugas = $(this).val();
-
-                    if (selectedPetugas === '') {
-                        table.column(4).search('').draw();
-                    } else {
-                        table.column(4).search('^' + selectedPetugas + '$', true, false).draw();
-                    }
                 });
 
                 // Custom search functionality
@@ -38,55 +28,45 @@
             <button class="btn btn-light btn-sm" id="sidebarToggle">
                 <i class="bi bi-list"></i>
             </button>
-            <h5 class="mb-0">Users</h5>
+            <h5 class="mb-0">Aset</h5>
         </div>
         <div class="d-flex align-items-center gap-3">
+            <!-- Search Input -->
+            <div class="position-relative">
+                <input type="text" class="form-control" id="searchInput" placeholder="Nama Asets..."
+                    style="padding-right: 40px; width: 250px;">
+                <button class="btn btn-link position-absolute end-0 top-50 translate-middle-y pe-3" type="button">
+                    <i class="bi bi-search text-muted"></i>
+                </button>
+            </div>
             <!-- Add User Button -->
-            <a href="{{ route('admin.users.create') }}" class="btn btn-primary">+ Tambah User</a>
+            <a href="{{ route('admin.aset.create') }}" class="btn btn-primary">+ Tambah Aset</a>
         </div>
     </div>
     <div class="card-body">
-        <div class="row mb-3">
-            <div class="col-md-8">
-                <div class="position-relative">
-                    <input type="text" class="form-control" id="searchInput" placeholder="Nama User..."
-                        style="padding-right: 40px;">
-                    <button class="btn btn-link position-absolute end-0 top-50 translate-middle-y pe-3" type="button">
-                        <i class="bi bi-search text-muted"></i>
-                    </button>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <select class="form-select" id="rolesFilter" aria-label="Roles filter">
-                    <option value="">Semua</option>
-                    <option value="Admin">Admin</option>
-                    <option value="Pegawai">Pegawai</option>
-                </select>
-            </div>
-        </div>
         <table id="usersDataTable" class="table table-striped table-hover">
             <thead>
             <tr>
                 <th>#</th>
                 <th>Nama</th>
-                <th>Email</th>
-                <th>Telepon</th>
+                <th>Tanggal terakhir Oppname</th>
                 <th>Roles</th>
                 <th>Action</th>
             </tr>
             </thead>
             <tbody>
-                @foreach ($users as $key => $p)
+                @foreach ($data as $key => $p)
                     <tr>
                         <td>{{ $key + 1 }}</td>
                         <td>{{ $p->nama }}</td>
-                        <td>{{ $p->email }}</td>
-                        <td>{{ $p->telepon ?? 'Tidak ada' }}</td>
+                        <td>25/07/2024</td>
                         <td>
-                            @if($p->roles === 'pegawai')
-                                <span class="badge bg-success">Pegawai</span>
-                            @elseif($p->roles === 'admin')
-                                <span class="badge bg-primary">Admin</span>
+                            @if($p->kondisi === 'baik')
+                                <span class="badge bg-success">Baik</span>
+                            @elseif($p->kondisi === 'rusakRingan')
+                                <span class="badge bg-warning">Rusak Ringan</span>
+                            @elseif($p->kondisi === 'rusakBerat')
+                                <span class="badge bg-danger">Rusak Berat</span>
                             @endif
                         </td>
                         <td>

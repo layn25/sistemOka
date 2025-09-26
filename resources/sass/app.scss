@@ -164,6 +164,8 @@ body.sidebar-collapsed {
     color: $black;
     font-size: 0.9rem;
     transition: all 0.2s ease;
+    padding: 0.5rem 2rem 0.5rem 0.75rem; 
+    line-height: 1.5;
 
     &::placeholder {
         color: $gray-500;
@@ -181,6 +183,13 @@ body.sidebar-collapsed {
         color: $gray-500;
     }
 }
+
+/* Style agar tampilan disabled mirip normal */
+.form-control:disabled {
+    background-color: #fff;   /* tetap putih */
+    color: $black;          
+}
+
 
 // Label form
 .form-label {

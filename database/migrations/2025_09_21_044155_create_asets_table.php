@@ -11,14 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('penugasans', function (Blueprint $table) {
+        Schema::create('asets', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('user_id')->references('id')->on('users');
-            $table->string('nama_tugas');
+            $table->string('nama');
             $table->text('deskripsi')->nullable();
-            $table->enum('status', ['diterima', 'ditolak', '0'])->default('0');
-            $table->dateTime('tanggal_mulai');
-            $table->dateTime('tanggal_selesai');
+            $table->enum('kondisi', ['baik', 'rusakRingan', 'rusakBerat'])->default('baik');
             $table->timestamps();
         });
     }
@@ -28,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('penugasans');
+        Schema::dropIfExists('asets');
     }
 };

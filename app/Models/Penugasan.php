@@ -14,4 +14,8 @@ class Penugasan extends Model
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
+    public function PenugasanAset()
+    {
+        return $this->hasMany(PenugasanAset::class, 'penugasan_id', 'id');
+    }
 }
