@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.dashboard')
 
 @section('content')
     <div class="card-header d-flex justify-content-between align-items-center">

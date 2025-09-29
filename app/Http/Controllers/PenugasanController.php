@@ -16,14 +16,14 @@ class PenugasanController extends Controller
     {
         $penugasan = Penugasan::all();
         $users = User::all();
-        return view('admin.penugasan.index', compact('penugasan', 'users'));
+        return view('pages.penugasan.index', compact('penugasan', 'users'));
     }
     
     public function create()
     {
         $users = User::all();
         $asets = Aset::all();
-        return view('admin.penugasan.create', compact('users', 'asets'));
+        return view('pages.penugasan.create', compact('users', 'asets'));
     }
 
     public function store(Request $request)
@@ -66,7 +66,7 @@ class PenugasanController extends Controller
     {
         $penugasan = Penugasan::findOrFail($id);
         $users = User::all();
-        return view('admin.penugasan.detail', compact('penugasan', 'users'));
+        return view('pages.penugasan.detail', compact('penugasan', 'users'));
     }
     public function update($id)
     {
@@ -74,7 +74,7 @@ class PenugasanController extends Controller
         $users = User::all();
         $asets = Aset::all();
 
-        return view('admin.penugasan.edit', compact('penugasan', 'users', 'asets'));
+        return view('pages.penugasan.edit', compact('penugasan', 'users', 'asets'));
     }
 
 }

@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.dashboard')
 
 @section('content')
     <script>
@@ -13,7 +13,7 @@
             </button>
             <h5 class="mb-0">Penugasan / Detail</h5>
         </div>
-        <a href="{{ route('admin.penugasan.index') }}" class="btn btn-outline-secondary btn-sm">Kembali</a>
+        <a href="{{ route('penugasan.index') }}" class="btn btn-outline-secondary btn-sm">Kembali</a>
     </div>
 
     <div class="card-body">
@@ -44,7 +44,7 @@
 
         <hr class="my-3"/>
 
-        <table id="asetDataTable" class="table table-striped table-hover">
+        <table id="" class="table table-striped table-hover">
             <thead>
             <tr>
                 <th>#</th>
@@ -78,7 +78,7 @@
             <button type="submit" class="btn btn-success">Selesai</button>
             <div class="d-flex gap-2">
                 <button type="submit" class="btn btn-danger mr-1">Hapus Penugasan</button>
-                <a href="{{ route('admin.penugasan.update', $penugasan->id) }}" class="btn btn-primary">Ubah Penugasan</a>
+                <a href="{{ route('penugasan.update', $penugasan->id) }}" class="btn btn-primary">Ubah Penugasan</a>
             </div>
         </div>
         

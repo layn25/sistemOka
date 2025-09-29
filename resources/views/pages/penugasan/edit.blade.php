@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.dashboard')
 
 @section('content')
     @push('js')
@@ -49,7 +49,7 @@
             </button>
             <h5 class="mb-0">Penugasan / Update</h5>
         </div>
-        <a href="{{ route('admin.penugasan.index') }}" class="btn btn-outline-secondary btn-sm">Kembali</a>
+        <a href="{{ route('penugasan.index') }}" class="btn btn-outline-secondary btn-sm">Kembali</a>
     </div>
 
     <div class="card-body">

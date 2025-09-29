@@ -6,6 +6,6 @@ class KehadiranController extends Controller
 {
     public function index()
     {
-        return view('admin.kehadiran.index');
+        return view('pages.kehadiran.index');
     }
 }

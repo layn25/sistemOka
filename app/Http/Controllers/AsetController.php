@@ -11,11 +11,11 @@ class AsetController extends Controller
     public function index()
     {
         $data = Aset::all();
-        return view('admin.aset.index', compact('data'));
+        return view('pages.aset.index', compact('data'));
     }
     public function create()
     {
-        return view('admin.aset.create');
+        return view('pages.aset.create');
     }
     public function store(Request $request)
     {

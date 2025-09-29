@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.dashboard')
 
 @section('content')
     @push('js')
@@ -50,19 +50,14 @@
             </button>
             <h5 class="mb-0">Penugasan / Buat</h5>
         </div>
-        <a href="{{ route('admin.penugasan.index') }}" class="btn btn-outline-secondary btn-sm">Kembali</a>
+        <a href="{{ route('penugasan.index') }}" class="btn btn-outline-secondary btn-sm">Kembali</a>
     </div>
     <div class="card-body">
-        <form action="{{ route('admin.penugasan.store') }}" method="POST">
+        <form action="{{ route('penugasan.store') }}" method="POST">
         @csrf
             <div class="mb-3">
-                <label class="form-label">Petugas</label>
-                <select name="user_id" id="user_id" class="form-control" required>
-                    <option value=""> Pilih Petugas</option>
-                    @foreach($users as $user)
-                        <option value="{{ $user->id }}">{{ $user->nama }}</option>
-                    @endforeach
-                </select>
+                <label for="nama_tugas">Nama Tugas</label>
+                <input type="text" name="nama_tugas" id="nama_tugas" class="form-control" required>
             </div>
             <div class="row mb-3">
                 <div class="col-md-6">
@@ -75,8 +70,13 @@
                 </div>
             </div>
             <div class="mb-3">
-                <label for="nama_tugas">Nama Tugas</label>
-                <input type="text" name="nama_tugas" id="nama_tugas" class="form-control" required>
+                <label class="form-label">Petugas</label>
+                <select name="user_id" id="user_id" class="form-control" required>
+                    <option value=""> Pilih Petugas</option>
+                    @foreach($users as $user)
+                        <option value="{{ $user->id }}">{{ $user->nama }}</option>
+                    @endforeach
+                </select>
             </div>
             <div class="mb-3">
                 <label class="form-label">Deskripsi Penugasan</label>

@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.dashboard')
 
 @section('content')
     <div class="card-header d-flex justify-content-between align-items-center">
@@ -8,10 +8,10 @@
             </button>
             <h5 class="mb-0">User / Detail</h5>
         </div>
-        <a href="{{ route('admin.users.index') }}" class="btn btn-outline-secondary btn-sm">Kembali</a>
+        <a href="{{ route('users.index') }}" class="btn btn-outline-secondary btn-sm">Kembali</a>
     </div>
     <div class="card-body">
-        <form action="{{ route('admin.users.edit', $data->id) }}" method="POST">
+        <form action="{{ route('users.edit', $data->id) }}" method="POST">
             @csrf
             @method('PUT')
             <div class="mb-3">

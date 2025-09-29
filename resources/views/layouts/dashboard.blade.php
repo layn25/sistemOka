@@ -34,13 +34,15 @@
             <nav class="card">
                 <div class="card-body justify-content-between d-flex flex-column">
                     <ul class="nav flex-column">
-                        <x-sidebar-list-item :icon="'bi-grid'" :title="'Dashboard'" :route="'admin.home'" :route-is="'admin.home'" />
-                        <x-sidebar-list-item :icon="'bi-inbox'" :title="'Penugasan'" :route="'admin.penugasan.index'" :route-is="'admin.penugasan.*'" />
-                        <x-sidebar-list-item :icon="'bi-people'" :title="'Users'" :route="'admin.users.index'" :route-is="'admin.users.*'" />
-                        <x-sidebar-list-item :icon="'bi-clipboard-check'" :title="'Kehadiran'" :route="'admin.kehadiran.index'" :route-is="'admin.kehadiran.*'" />
-                        <x-sidebar-list-item :icon="'bi-pause-circle'" :title="'Izin'" :route="'admin.izin.index'" :route-is="'admin.izin.*'" />
-                        <x-sidebar-list-item :icon="'bi-arrow-left-right'" :title="'Approval Petugas'" :route="'admin.approval-tugas.index'" :route-is="'admin.approval.*'" />
-                        <x-sidebar-list-item :icon="'bi-box'" :title="'Aset'" :route="'admin.aset.index'" :route-is="'admin.aset.*'" />
+                        <x-sidebar-list-item :icon="'bi-grid'" :title="'Dashboard'" :route="'home'" :route-is="'home'" />
+                        <x-sidebar-list-item :icon="'bi-inbox'" :title="'Penugasan'" :route="'penugasan.index'" :route-is="'penugasan.*'" />
+                        @if (Auth::user()->roles == 'admin')
+                            <x-sidebar-list-item :icon="'bi-people'" :title="'Users'" :route="'users.index'" :route-is="'users.*'" />
+                        @endif
+                        <x-sidebar-list-item :icon="'bi-clipboard-check'" :title="'Kehadiran'" :route="'kehadiran.index'" :route-is="'kehadiran.*'" />
+                        <x-sidebar-list-item :icon="'bi-pause-circle'" :title="'Izin'" :route="'izin.index'" :route-is="'izin.*'" />
+                        <x-sidebar-list-item :icon="'bi-arrow-left-right'" :title="'Approval Petugas'" :route="'approval-tugas.index'" :route-is="'approval.*'" />
+                        <x-sidebar-list-item :icon="'bi-box'" :title="'Aset'" :route="'aset.index'" :route-is="'aset.*'" />
                     </ul>
                     <div>
                         <hr>

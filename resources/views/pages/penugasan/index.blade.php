@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.dashboard')
 
 @section('content')
 @push('js')
@@ -43,7 +43,7 @@
             </button>
             <h5 class="mb-0">Penugasan</h5>
         </div>
-        <a href="{{ route('admin.penugasan.create') }}" class="btn btn-primary">+ Buat Penugasan</a>
+        <a href="{{ route('penugasan.create') }}" class="btn btn-primary">+ Buat Penugasan</a>
     </div>
     <div class="card-body">
         <div class="row mb-3">
@@ -113,12 +113,12 @@
                                 </button>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a class="dropdown-item" href="{{ route('admin.penugasan.detail', $p->id) }}">
+                                        <a class="dropdown-item" href="{{ route('penugasan.detail', $p->id) }}">
                                             <i class="bi bi-eye me-2"></i>Detail
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="{{ route('admin.penugasan.update', $p->id) }}">
+                                        <a class="dropdown-item" href="{{ route('penugasan.update', $p->id) }}">
                                             <i class="bi bi-pencil me-2"></i>Ubah
                                         </a>
                                     </li>

@@ -18,4 +18,8 @@ class Penugasan extends Model
     {
         return $this->hasMany(PenugasanAset::class, 'penugasan_id', 'id');
     }
+    public function ApprovalPetugas()
+    {
+        return $this->hasMany(ApprovalPetugas::class, 'penugasan_id', 'id');
+    }
 }

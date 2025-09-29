@@ -6,6 +6,6 @@ class ApprovalTugasController extends Controller
 {
     public function index()
     {
-        return view('admin.approval_tugas.index');
+        return view('pages.approval_tugas.index');
     }
 }

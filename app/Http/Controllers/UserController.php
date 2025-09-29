@@ -11,12 +11,12 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
-        return view('admin.users.index', compact('users'));
+        return view('pages.users.index', compact('users'));
     }
 
     public function create()
     {
-        return view('admin.users.create');
+        return view('pages.users.create');
     }
 
     public function store(Request $request)
@@ -47,7 +47,7 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $data = User::findOrFail($id);
-        return view('admin.users.edit', compact('data'));
+        return view('pages.users.edit', compact('data'));
     }
 
     public function edit(Request $request, $id)
@@ -83,7 +83,7 @@ class UserController extends Controller
 
             $data->save();
 
-            return redirect()->route('admin.users.index')->with('success', 'User berhasil diperbarui!');
+            return redirect()->route('users.index')->with('success', 'User berhasil diperbarui!');
         } catch (\Throwable $th) {
             return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $th->getMessage())->withInput();
         }

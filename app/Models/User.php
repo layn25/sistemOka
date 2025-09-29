@@ -57,4 +57,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(Penugasan::class, 'user_id', 'id');
     }
+    public function Izin()
+    {
+        return $this->hasMany(Izin::class, 'user_id', 'id');
+    }
 }
