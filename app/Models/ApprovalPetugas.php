@@ -10,7 +10,7 @@ class ApprovalPetugas extends Model
     use Uuid;
     protected $guarded = [];
 
-    public function penugasan()
+    public function Penugasan()
     {
         return $this->belongsTo(Penugasan::class, 'penugasan_id', 'id');
     }

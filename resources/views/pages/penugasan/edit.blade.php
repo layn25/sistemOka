@@ -94,14 +94,17 @@
             </div>
 
             <hr class="my-3"/>
-            <select class="form-select" id="pilihAset" name="aset[]" multiple="multiple">
-                @foreach ($asets as $aset)
-                    <option value="{{ $aset->id }}" 
-                        {{ $penugasan->PenugasanAset->pluck('aset_id')->contains($aset->id) ? 'selected' : '' }}>
-                        {{ $aset->nama }}
-                    </option>
-                @endforeach
-            </select>
+            <div class="mb-3">
+                <label class="form-label">Pilih Aset</label>
+                <select class="form-select" id="pilihAset" name="aset[]" multiple="multiple">
+                    @foreach ($asets as $aset)
+                        <option value="{{ $aset->id }}" 
+                            {{ $penugasan->PenugasanAset->pluck('aset_id')->contains($aset->id) ? 'selected' : '' }}>
+                            {{ $aset->nama }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
             <div class="d-flex justify-content-end">
                 <button type="submit" class="btn btn-primary">Update</button>
             </div>

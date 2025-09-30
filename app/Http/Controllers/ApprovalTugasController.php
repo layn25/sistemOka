@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ApprovalPetugas;
+
 class ApprovalTugasController extends Controller
 {
     public function index()
     {
-        return view('pages.approval_tugas.index');
+        $data = ApprovalPetugas::all();
+        return view('pages.approval_tugas.index', compact('data'));
     }
 }

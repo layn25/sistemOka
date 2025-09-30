@@ -26,7 +26,10 @@ Route::group(['middleware' => 'auth', 'prefix' => '/'], function () {
         Route::get('/create', [PenugasanController::class, 'create'])->name('create');
         Route::post('/store', [PenugasanController::class, 'store'])->name('store');
         Route::get('/detail/{id}', [PenugasanController::class, 'detail'])->name('detail');
+        Route::get('/selesai/{id}', [PenugasanController::class, 'selesai'])->name('selesai');
         Route::get('/update/{id}', [PenugasanController::class, 'update'])->name('update');
+        Route::put('/diterima/{id}', [PenugasanController::class, 'diterima'])->name('diterima');
+        Route::post('/ditolak', [PenugasanController::class, 'ditolak'])->name('ditolak');
     });
 
     Route::group(['prefix' => 'kehadiran', 'as' => 'kehadiran.'], function () {

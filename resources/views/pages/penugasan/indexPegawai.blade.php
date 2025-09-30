@@ -17,23 +17,13 @@
                 });
 
                 // Petugas filter functionality
-                $('#petugasFilter').on('change', function () {
-                    const selectedPetugas = $(this).val();
-
-                    if (selectedPetugas === '') {
-                        table.column(3).search('').draw();
-                    } else {
-                        table.column(3).search('^' + selectedPetugas + '$', true, false).draw();
-                    }
-                });
-                // Status filter functionality
                 $('#statusFilter').on('change', function () {
-                    const selectedPetugas = $(this).val();
+                    const selectedStatus = $(this).val();
 
-                    if (selectedPetugas === '') {
+                    if (selectedStatus === '') {
                         table.column(4).search('').draw();
                     } else {
-                        table.column(4).search('^' + selectedPetugas + '$', true, false).draw();
+                        table.column(4).search('^' + selectedStatus + '$', true, false).draw();
                     }
                 });
 
@@ -66,15 +56,8 @@
                     </button>
                 </div>
             </div>
-            <div class="col-md-3">
-                <select class="form-select" id="petugasFilter" aria-label="Petugas filter">
-                    <option value="">Semua Petugas</option>
-                    @foreach ($users as $petugas)
-                        <option value="{{ $petugas->nama }}">{{ $petugas->nama }}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="col-md-3">
+            
+            <div class="col-md-6">
                 <select class="form-select" id="statusFilter" aria-label="Petugas filter">
                     <option value="">Semua Status</option>
                     <option value="Diproses">Diproses</option>
@@ -125,28 +108,30 @@
                                             <i class="bi bi-eye me-2"></i>Detail
                                         </a>
                                     </li>
-                                    <li>
-                                        <a class="dropdown-item" href="{{ route('penugasan.update', $p->id) }}">
-                                            <i class="bi bi-pencil me-2"></i>Ubah
-                                        </a>
-                                    </li>
-                                    <li><hr class="dropdown-divider"></li>
-                                    <li>
-                                        <form action="" method="POST" id="delete-{{ $p->id }}">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="button" class="dropdown-item text-danger" onclick="alertConfirm(this)" data-id="{{ $p->id }}">
-                                                <i class="bi bi-trash me-2"></i>Hapus
+                                    @if ($p->status === '0')
+                                        <li>
+                                            <form action="{{ route('penugasan.diterima', $p->id) }}" method="POST" id="terima-{{ $p->id }}">
+                                                @csrf
+                                                @method('PUT')
+                                                <button type="button" class="dropdown-item text-success" onclick="confirmTerima(this)" data-id="{{ $p->id }}">
+                                                    <i class="bi bi-check-circle me-2"></i> Diterima
+                                                </button>
+                                            </form>
+                                        </li>
+
+                                        <li>
+                                            <button type="button" class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#ditolakModal-{{ $p->id }}">
+                                                <i class="bi bi-x-circle me-2"></i> Ditolak
                                             </button>
-                                        </form>
-                                    </li>
+                                        </li>
+                                    @endif
                                 </ul>
                             </div>
                         </td>
                     </tr>
                 @endforeach
             </tbody>
-
         </table>
     </div>
+    @include('pages.penugasan.ditolak')
 @endsection

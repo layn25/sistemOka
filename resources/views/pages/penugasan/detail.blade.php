@@ -75,7 +75,7 @@
         </table>
         
         <div class="d-flex justify-content-between mt-2">
-            <button type="submit" class="btn btn-success">Selesai</button>
+            <a href="{{ route('penugasan.selesai', $penugasan->id) }}" class="btn btn-success">Selesai</a>
             <div class="d-flex gap-2">
                 <button type="submit" class="btn btn-danger mr-1">Hapus Penugasan</button>
                 <a href="{{ route('penugasan.update', $penugasan->id) }}" class="btn btn-primary">Ubah Penugasan</a>

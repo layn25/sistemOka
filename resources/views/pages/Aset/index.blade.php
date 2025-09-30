@@ -12,7 +12,7 @@
                         "search": "",
                         "searchPlaceholder": "Cari...",
                     },
-                    "dom": 'rt<"d-flex justify-content-between align-items-center"lip>',
+                    "dom": 'rt<"d-flex justify-content-between align-items-center mt-2"lip>',
                     "order": [[0, 'asc']]
                 });
 

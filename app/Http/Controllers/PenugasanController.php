@@ -2,21 +2,29 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ApprovalPetugas;
 use App\Models\Aset;
 use App\Models\Penugasan;
 use App\Models\PenugasanAset;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Throwable;
 
 class PenugasanController extends Controller
 {
     public function index()
     {
-        $penugasan = Penugasan::all();
         $users = User::all();
-        return view('pages.penugasan.index', compact('penugasan', 'users'));
+        if (Auth::user()->roles == 'admin') {
+            $penugasan = Penugasan::all();
+            return view('pages.penugasan.index', compact('penugasan', 'users'));
+        } else {
+            $penugasan = Penugasan::where('user_id', Auth::user()->id)->get();
+            return view('pages.penugasan.indexPegawai', compact('penugasan', 'users'));
+        }
+        
     }
     
     public function create()
@@ -68,6 +76,11 @@ class PenugasanController extends Controller
         $users = User::all();
         return view('pages.penugasan.detail', compact('penugasan', 'users'));
     }
+    public function selesai($id)
+    {
+        $penugasan = Penugasan::findOrFail($id);
+        return view('pages.penugasan.selesai', compact('penugasan'));
+    }
     public function update($id)
     {
         $penugasan = Penugasan::findOrFail($id);
@@ -75,6 +88,49 @@ class PenugasanController extends Controller
         $asets = Aset::all();
 
         return view('pages.penugasan.edit', compact('penugasan', 'users', 'asets'));
+    }
+    public function diterima($id)
+    {
+        try {
+
+            $data = Penugasan::findOrFail($id);
+            $data->status = 'diterima';
+            $data->save();
+
+            return redirect()->back()->with('success', "Penugasan berhasil diterima.");
+        } catch (\Throwable $th) {
+
+            return redirect()->back()->with('error', $th->getMessage());
+        }
+    }
+
+    public function ditolak(Request $request)
+    {
+        try {
+            $request->validate([
+                'penugasan_id' => 'required|exists:penugasans,id', 
+                'deskripsi' => 'required|string',
+                'bukti' => 'required|file',
+            ]);
+
+            $linkBukti = $request->file('bukti')->store('bukti_ditolak', 'public');
+
+            $penugasan = Penugasan::findOrFail($request->penugasan_id);
+            $penugasan->status = 'ditolak';
+            $penugasan->save();
+
+            $data = new ApprovalPetugas();
+            $data->penugasan_id = $request->penugasan_id;  
+            $data->deskripsi = $request->deskripsi; 
+            $data->bukti = $linkBukti;  
+            $data->save();
+
+            
+
+            return redirect()->back()->with('success', 'Penugasan berhasil ditolak!');
+        } catch (Throwable $th) {
+            return redirect()->back()->with('error', $th->getMessage());
+        }
     }
 
 }
