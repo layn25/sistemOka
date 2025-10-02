@@ -15,7 +15,7 @@
             @csrf
             <div class="mb-3">
                 <label class="form-label">Nama</label>
-                <input type="text" class="form-control" name="nama" placeholder="Nama..." value="{{ old('nama') }}" required>
+                <input type="text" class="form-control" name="nama" placeholder="Masukan Nama" value="{{ old('nama') }}" required>
                 @error('nama')
                     <div class="text-danger small mt-1">{{ $message }}</div>
                 @enderror
@@ -23,12 +23,12 @@
 
             <div class="mb-3">
                 <label class="form-label">Deskripsi</label>
-                <textarea name="deskripsi" class="form-control" rows="3" value="{{ old('deskripsi') }}"></textarea>
+                <textarea name="deskripsi" placeholder="Masukan Deskripsi" class="form-control" rows="3" value="{{ old('deskripsi') }}"></textarea>
                 @error('deskripsi')
                     <div class="text-danger small mt-1">{{ $message }}</div>
                 @enderror
             </div>
-
+            <h5 class="mb-4">Kondisi Aset</h5>
             <div class="mb-4">
                 <label class="form-label">Kondisi</label>
                 <select class="form-select" name="kondisi" required>
@@ -38,6 +38,13 @@
                     <option value="rusakBerat" {{ old('kondisi') == 'rusakBerat' ? 'selected' : '' }}>Rusak Berat</option>
                 </select>
                 @error('roles')
+                    <div class="text-danger small mt-1">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Deskripsi Kondisi</label>
+                <textarea name="deskripsi_kondisi" placeholder="Masukan Deskripsi Kondisi"  class="form-control" rows="3" value="{{ old('deskripsi_kondisi') }}"></textarea>
+                @error('deskripsi_kondisi')
                     <div class="text-danger small mt-1">{{ $message }}</div>
                 @enderror
             </div>

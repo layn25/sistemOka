@@ -5,14 +5,13 @@ namespace App\Models;
 use App\Traits\Uuid;
 use Illuminate\Database\Eloquent\Model;
 
-class PengembalianAset extends Model
+class Dokumentasi extends Model
 {
     use Uuid;
     protected $guarded = [];
 
-    public function Aset()
+    public function Penugasan()
     {
-        return $this->belongsTo(Aset::class, 'aset_id', 'id');
+        return $this->belongsTo(Penugasan::class, 'penugasan_id', 'id');
     }
-
 }

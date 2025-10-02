@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Aset;
+use App\Models\OpnameAset;
 use Illuminate\Http\Request;
 use Throwable;
 
@@ -24,6 +25,7 @@ class AsetController extends Controller
                 'nama'=> 'required|string|max:255',
                 'deskripsi' => 'nullable|string',
                 'kondisi'=> 'required|in:baik,rusakRingan,rusakBerat',
+                'deskripsi_kondisi' => 'string',
             ]);
 
             $data = new Aset();
@@ -32,9 +34,23 @@ class AsetController extends Controller
             $data->kondisi = $request->kondisi;
             $data->save();
 
+            $opname = new OpnameAset();
+            $opname->aset_id = $data->id;
+            $opname->kondisi = $request->kondisi;
+            $opname->deskripsi = $request->deskripsi_kondisi;
+            $opname->kondisi = $request->kondisi;
+            $opname->tanggal = now();
+            $opname->save();
+
+
             return redirect()->back()->with('success', 'Aset berhasil ditambahkan!');
         } catch (Throwable $th) {
             return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $th->getMessage())->withInput();
         }
+    }
+    public function detail($id)
+    {
+        $aset = Aset::findOrFail($id);
+        return view('pages.aset.detail', compact('aset'));
     }
 }

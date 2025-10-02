@@ -25,9 +25,11 @@
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 <body class="{{ session('sidebar_collapsed') ? 'sidebar-collapsed' : '' }}">
+    {{-- sweetalert2 --}}
     <div class="berhasil" data-berhasil="{{ ucWords(Session::get('success')) }}"></div>
     <div class="gagal" data-gagal="{{ ucWords(Session::get('error')) }}"></div>
     <div class="warning" data-warning="{{ ucWords(Session::get('warning')) }}"></div>
+    
     <div id="app" class="d-flex">
         <!-- Sidebar -->
         <div id="sidebar" class="p-3 {{ session('sidebar_collapsed') ? 'collapsed' : '' }}">
@@ -38,12 +40,13 @@
                             <x-sidebar-list-item :icon="'bi-grid'" :title="'Dashboard'" :route="'home'" :route-is="'home'" />
                             <x-sidebar-list-item :icon="'bi-inbox'" :title="'Penugasan'" :route="'penugasan.index'" :route-is="'penugasan.*'" />
                             <x-sidebar-list-item :icon="'bi-people'" :title="'Users'" :route="'users.index'" :route-is="'users.*'" />
-                            <x-sidebar-list-item :icon="'bi-clipboard-check'" :title="'Kehadiran'" :route="'kehadiran.index'" :route-is="'kehadiran.*'" />
+                            {{-- <x-sidebar-list-item :icon="'bi-clipboard-check'" :title="'Kehadiran'" :route="'kehadiran.index'" :route-is="'kehadiran.*'" /> --}}
                             <x-sidebar-list-item :icon="'bi-pause-circle'" :title="'Izin'" :route="'izin.index'" :route-is="'izin.*'" />
                             <x-sidebar-list-item :icon="'bi-arrow-left-right'" :title="'Approval Petugas'" :route="'approval-tugas.index'" :route-is="'approval.*'" />
                             <x-sidebar-list-item :icon="'bi-box'" :title="'Aset'" :route="'aset.index'" :route-is="'aset.*'" />
                         @endif
                         @if (Auth::user()->roles == 'pegawai')
+                            <x-sidebar-list-item :icon="'bi-grid'" :title="'Dashboard'" :route="'home'" :route-is="'home'" />
                             <x-sidebar-list-item :icon="'bi-inbox'" :title="'Penugasan'" :route="'penugasan.index'" :route-is="'penugasan.*'" />
                             <x-sidebar-list-item :icon="'bi-pause-circle'" :title="'Izin'" :route="'izin.index'" :route-is="'izin.*'" />
                         @endif

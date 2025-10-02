@@ -22,4 +22,8 @@ class Penugasan extends Model
     {
         return $this->hasMany(ApprovalPetugas::class, 'penugasan_id', 'id');
     }
+    public function Dokumentasi()
+    {
+        return $this->hasMany(Dokumentasi::class, 'penugasan_id', 'id');
+    }
 }

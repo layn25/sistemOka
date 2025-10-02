@@ -49,7 +49,7 @@
             <tr>
                 <th>#</th>
                 <th>Nama</th>
-                <th>Tanggal terakhir Oppname</th>
+                <th>Tanggal terakhir Opname</th>
                 <th>Roles</th>
                 <th>Action</th>
             </tr>
@@ -59,7 +59,13 @@
                     <tr>
                         <td>{{ $key + 1 }}</td>
                         <td>{{ $p->nama }}</td>
-                        <td>25/07/2024</td>
+                        <td>
+                            @if($p->OpnameAset->isNotEmpty())
+                                {{ \Carbon\Carbon::parse($p->OpnameAset->max('tanggal'))->format('d M Y H:i') }}
+                            @else
+                                -
+                            @endif
+                        </td>
                         <td>
                             @if($p->kondisi === 'baik')
                                 <span class="badge bg-success">Baik</span>
@@ -75,11 +81,11 @@
                                     <i class="bi bi-three-dots-vertical"></i>
                                 </button>
                                 <ul class="dropdown-menu">
-                                    {{-- <li>
-                                        <a class="dropdown-item" href="">
+                                    <li>
+                                        <a class="dropdown-item"  href="{{ route('aset.detail', $p->id) }}">
                                             <i class="bi bi-eye me-2"></i>Detail
                                         </a>
-                                    </li> --}}
+                                    </li>
                                     <li>
                                         <a class="dropdown-item" href="{{ route('users.update', $p->id) }}">
                                             <i class="bi bi-pencil me-2"></i>Ubah

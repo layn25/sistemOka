@@ -5,7 +5,7 @@ namespace App\Models;
 use App\Traits\Uuid;
 use Illuminate\Database\Eloquent\Model;
 
-class PengembalianAset extends Model
+class OpnameAset extends Model
 {
     use Uuid;
     protected $guarded = [];
@@ -14,5 +14,4 @@ class PengembalianAset extends Model
     {
         return $this->belongsTo(Aset::class, 'aset_id', 'id');
     }
-
 }

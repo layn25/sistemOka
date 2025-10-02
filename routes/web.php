@@ -59,6 +59,7 @@ Route::group(['middleware' => 'auth', 'prefix' => '/'], function () {
 
     Route::group(['prefix' => 'aset', 'as' => 'aset.'], function () {
         Route::get('/', [AsetController::class, 'index'])->name('index');
+        Route::get('/detail/{id}', [AsetController::class, 'detail'])->name('detail');
         Route::get('/create', [AsetController::class, 'create'])->name('create');
         Route::post('/store', [AsetController::class, 'store'])->name('store');
         Route::get('/update', [AsetController::class, 'update'])->name('update');
