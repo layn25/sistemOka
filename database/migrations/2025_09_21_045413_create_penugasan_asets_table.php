@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('penugasan_asets', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('penugasan_id')->references('id')->on('penugasans');
-            $table->foreignUuid('aset_id')->references('id')->on('asets');
+            $table->foreignUuid('penugasan_id')->constrained('penugasans')->onDelete('cascade');
+            $table->foreignUuid('aset_id')->constrained('asets')->onDelete('cascade');
             $table->dateTime('tanggal');
             $table->timestamps();
         });

@@ -132,7 +132,7 @@
                                     </li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li>
-                                        <form action="" method="POST" id="delete-{{ $p->id }}">
+                                        <form action="{{ route('penugasan.delete', $p->id) }}" method="POST" id="delete-{{ $p->id }}">
                                             @csrf
                                             @method('DELETE')
                                             <button type="button" class="dropdown-item text-danger" onclick="alertConfirm(this)" data-id="{{ $p->id }}">

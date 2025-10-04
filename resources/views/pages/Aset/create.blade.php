@@ -6,7 +6,7 @@
             <button class="btn btn-light btn-sm" id="sidebarToggle">
                 <i class="bi bi-list"></i>
             </button>
-            <h5 class="mb-0">Users / Tambah Aset</h5>
+            <h5 class="mb-0">Aset / Tambah Aset</h5>
         </div>
         <a href="{{ route('aset.index') }}" class="btn btn-outline-secondary btn-sm">Kembali</a>
     </div>

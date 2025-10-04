@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('opname_asets', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('aset_id')->references('id')->on('asets');
+            $table->foreignUuid('aset_id')->constrained('asets')->onDelete('cascade');
             $table->text('deskripsi')->nullable();
             $table->enum('kondisi', ['baik', 'rusakRingan', 'rusakBerat'])->default('baik');
             $table->dateTime('tanggal');

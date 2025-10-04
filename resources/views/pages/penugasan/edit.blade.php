@@ -53,7 +53,7 @@
     </div>
 
     <div class="card-body">
-        <form action="" method="POST">
+        <form action="{{ route('penugasan.edit', $penugasan->id)}}" method="POST">
             @csrf
             @method('PUT')
 

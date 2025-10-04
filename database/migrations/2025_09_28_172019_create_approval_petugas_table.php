@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('approval_petugas', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('penugasan_id')->references('id')->on('penugasans');
+            $table->foreignUuid('penugasan_id')->constrained('penugasans')->onDelete('cascade');
             $table->text('deskripsi');
             $table->string('bukti');
             $table->enum('kondisi', ['diterima', 'ditolak', 'diproses'])->default('diproses');

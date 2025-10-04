@@ -42,7 +42,7 @@
                             <x-sidebar-list-item :icon="'bi-people'" :title="'Users'" :route="'users.index'" :route-is="'users.*'" />
                             {{-- <x-sidebar-list-item :icon="'bi-clipboard-check'" :title="'Kehadiran'" :route="'kehadiran.index'" :route-is="'kehadiran.*'" /> --}}
                             <x-sidebar-list-item :icon="'bi-pause-circle'" :title="'Izin'" :route="'izin.index'" :route-is="'izin.*'" />
-                            <x-sidebar-list-item :icon="'bi-arrow-left-right'" :title="'Approval Petugas'" :route="'approval-tugas.index'" :route-is="'approval.*'" />
+                            <x-sidebar-list-item :icon="'bi-arrow-left-right'" :title="'Approval Petugas'" :route="'approval-tugas.index'" :route-is="'approval-tugas.*'" />
                             <x-sidebar-list-item :icon="'bi-box'" :title="'Aset'" :route="'aset.index'" :route-is="'aset.*'" />
                         @endif
                         @if (Auth::user()->roles == 'pegawai')
@@ -55,7 +55,7 @@
                         <hr>
                         <ul class="nav flex-column">
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="{{ route('profile.index') }}" class="nav-link {{ request()->routeIs('profile.*') ? 'active' : '' }}">
                                     <i class="bi bi-person me-2"></i> <span class="nav-item-text">Profile</span>
                                 </a>
                             </li>

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('pengembalian_asets', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('penugasan_aset_id')->references('id')->on('penugasan_asets');
+            $table->foreignUuid('penugasan_aset_id')->constrained('penugasan_asets')->onDelete('cascade');
             $table->dateTime('tanggal');
             $table->enum('kondisi', ['baik', 'rusakRingan', 'rusakBerat'])->default('baik');
             $table->timestamps();

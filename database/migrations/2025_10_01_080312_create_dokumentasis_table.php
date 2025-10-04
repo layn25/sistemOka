@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('dokumentasis', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('penugasan_id')->references('id')->on('penugasans');
+            $table->foreignUuid('penugasan_id')->constrained('penugasans')->onDelete('cascade');
             $table->string('file');
             $table->dateTime('tanggal');
             $table->timestamps();

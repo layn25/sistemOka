@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ApprovalPetugas;
+use App\Models\Izin;
+use App\Models\Penugasan;
+
 class HomeController extends Controller
 {
     /**
@@ -11,6 +15,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('pages.index');
+        $penugasan = Penugasan::count();
+        $approval = ApprovalPetugas::where('kondisi', 'proses')->count();
+        $izin = Izin::where('status', 'proses')->count();
+
+        return view('pages.index', compact('penugasan', 'approval', 'izin'));
     }
+
 }

@@ -89,6 +89,44 @@ class PenugasanController extends Controller
 
         return view('pages.penugasan.edit', compact('penugasan', 'users', 'asets'));
     }
+    public function edit(Request $request, $id)
+    {
+        try {
+            $request->validate([
+                'user_id' => 'required|exists:users,id', 
+                'nama_tugas' => 'required|string|max:255',
+                'deskripsi' => 'nullable|string',
+                'tanggal_mulai' => 'required|date',
+                'tanggal_selesai' => 'required|date|after_or_equal:tanggal_mulai',
+                'aset' => 'required|array',
+                'aset.*' => 'exists:asets,id',
+            ]);
+
+            $data = Penugasan::findOrFail($id);
+            $data->user_id = $request->user_id;  
+            $data->nama_tugas = $request->nama_tugas;
+            $data->deskripsi = $request->deskripsi;
+            $data->tanggal_mulai = Carbon::parse($request->tanggal_mulai)->format('Y-m-d H:i:s');
+            $data->tanggal_selesai = Carbon::parse($request->tanggal_selesai)->format('Y-m-d H:i:s');
+            $data->save();
+
+            PenugasanAset::where('penugasan_id', $data->id)->delete();
+            if ($request->has('aset')) {
+                foreach ($request->aset as $asetId) {
+                    PenugasanAset::create([
+                        'penugasan_id' => $data->id,
+                        'aset_id' => $asetId,
+                        'tanggal' => Carbon::now(),
+                    ]);
+                }
+            }
+
+            return redirect()->back()->with('success', 'Penugasan berhasil diupdate!');
+        } catch (Throwable $th) {
+            return redirect()->back()->with('error', $th->getMessage());
+        }
+    }
+
     public function diterima($id)
     {
         try {
@@ -130,6 +168,16 @@ class PenugasanController extends Controller
             return redirect()->back()->with('success', 'Penugasan berhasil ditolak!');
         } catch (Throwable $th) {
             return redirect()->back()->with('error', $th->getMessage());
+        }
+    }
+    public function delete($id)
+    {
+        try {
+            $data = Penugasan::findOrFail($id);
+            $data->delete();
+            return redirect()->back()->with('success', 'Penugasan berhasil dihapus!');
+        } catch (Throwable $th) {
+            return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $th->getMessage());
         }
     }
 

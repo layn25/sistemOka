@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('penugasans', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('user_id')->references('id')->on('users');
+            $table->foreignUuid('user_id')->constrained('users')->onDelete('cascade');
             $table->string('nama_tugas');
             $table->text('deskripsi')->nullable();
             $table->enum('status', ['diterima', 'ditolak', '0'])->default('0');

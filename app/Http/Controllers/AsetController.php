@@ -53,4 +53,48 @@ class AsetController extends Controller
         $aset = Aset::findOrFail($id);
         return view('pages.aset.detail', compact('aset'));
     }
+    public function update($id)
+    {
+        $data = Aset::findOrFail($id);
+        return view('pages.aset.edit', compact('data'));
+    }
+    public function edit(Request $request, $id)
+    {
+        try {
+            $request->validate([
+                'nama'=> 'required|string|max:255',
+                'deskripsi' => 'nullable|string',
+                'kondisi'=> 'required|in:baik,rusakRingan,rusakBerat',
+                'deskripsi_kondisi' => 'string',
+            ]);
+
+            $data = Aset::findOrFail($id);
+            $data->nama = $request->nama;  
+            $data->deskripsi = $request->deskripsi;
+            $data->kondisi = $request->kondisi;
+            $data->save();
+
+            $opname = new OpnameAset();
+            $opname->aset_id = $data->id;
+            $opname->kondisi = $request->kondisi;
+            $opname->deskripsi = $request->deskripsi_kondisi;
+            $opname->kondisi = $request->kondisi;
+            $opname->tanggal = now();
+            $opname->save();
+            return redirect()->back()->with('success', 'Aset berhasil diupdate!');
+        } catch (Throwable $th) {
+            return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $th->getMessage())->withInput();
+        }   
+    }
+    public function delete($id)
+    {
+        try {
+            $data = Aset::findOrFail($id);
+            $data->delete();
+            return redirect()->back()->with('success', 'Aset berhasil dihapus!');
+        } catch (Throwable $th) {
+            return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $th->getMessage());
+        }
+    }
+
 }

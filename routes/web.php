@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IzinController;
 use App\Http\Controllers\KehadiranController;
 use App\Http\Controllers\PenugasanController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SidebarController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
@@ -28,8 +29,10 @@ Route::group(['middleware' => 'auth', 'prefix' => '/'], function () {
         Route::get('/detail/{id}', [PenugasanController::class, 'detail'])->name('detail');
         Route::get('/selesai/{id}', [PenugasanController::class, 'selesai'])->name('selesai');
         Route::get('/update/{id}', [PenugasanController::class, 'update'])->name('update');
+        Route::put('edit/{id}', [PenugasanController::class, 'edit'])->name('edit');
         Route::put('/diterima/{id}', [PenugasanController::class, 'diterima'])->name('diterima');
         Route::post('/ditolak', [PenugasanController::class, 'ditolak'])->name('ditolak');
+        Route::delete('delete/{id}', [PenugasanController::class, 'delete'])->name('delete');
     });
 
     Route::group(['prefix' => 'kehadiran', 'as' => 'kehadiran.'], function () {
@@ -62,6 +65,12 @@ Route::group(['middleware' => 'auth', 'prefix' => '/'], function () {
         Route::get('/detail/{id}', [AsetController::class, 'detail'])->name('detail');
         Route::get('/create', [AsetController::class, 'create'])->name('create');
         Route::post('/store', [AsetController::class, 'store'])->name('store');
-        Route::get('/update', [AsetController::class, 'update'])->name('update');
+        Route::get('/update/{id}', [AsetController::class, 'update'])->name('update');
+        Route::put('edit/{id}', [AsetController::class, 'edit'])->name('edit');
+        Route::delete('delete/{id}', [AsetController::class, 'delete'])->name('delete');
+    });
+    Route::group(['prefix' => 'profile', 'as' => 'profile.'], function () {
+        Route::get('/', [ProfileController::class, 'profile'])->name('index');
+        Route::put('/edit/{id}', [ProfileController::class, 'edit'])->name('edit');
     });
 });

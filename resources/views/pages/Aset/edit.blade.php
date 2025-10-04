@@ -6,12 +6,12 @@
             <button class="btn btn-light btn-sm" id="sidebarToggle">
                 <i class="bi bi-list"></i>
             </button>
-            <h5 class="mb-0">User / Detail</h5>
+            <h5 class="mb-0">Aset / Edit</h5>
         </div>
-        <a href="{{ route('users.index') }}" class="btn btn-outline-secondary btn-sm">Kembali</a>
+        <a href="{{ route('aset.index') }}" class="btn btn-outline-secondary btn-sm">Kembali</a>
     </div>
     <div class="card-body">
-        <form action="{{ route('users.edit', $data->id) }}" method="POST">
+        <form action="{{ route('aset.edit', $data->id) }}" method="POST">
             @csrf
             @method('PUT')
             <div class="mb-3">
@@ -21,54 +21,41 @@
                     <div class="text-danger small mt-1">{{ $message }}</div>
                 @enderror
             </div>
-
             <div class="mb-3">
-                <label class="form-label">Email</label>
-                <input type="email" class="form-control" name="email" placeholder="Email..." value="{{ old('email') ?? $data->email  }}" required>
-                @error('email')
-                    <div class="text-danger small mt-1">{{ $message }}</div>
-                @enderror
+                <label class="form-label">Deskripsi</label>
+                <textarea name="deskripsi" class="form-control" rows="3">{{ old('deskripsi', $data->deskripsi) }}</textarea>
             </div>
-
-            <div class="mb-3">
-                <label class="form-label">Password</label>
-                <div class="position-relative">
-                    <input type="password" class="form-control" name="password" id="password" placeholder="Password...">
-                    <button type="button" class="btn btn-link position-absolute end-0 top-50 translate-middle-y pe-3" id="togglePassword">
-                        <i class="bi bi-eye" id="togglePasswordIcon"></i>
-                    </button>
-                </div>
-                <small class="text-danger">Kosongkan jika tidak ingin mengganti password</small>
-                @error('password')
-                    <div class="text-danger small mt-1">{{ $message }}</div>
-                @enderror
-            </div>
-
-            <div class="mb-3">
-                <label class="form-label">Telepon</label>
-                <input type="number" class="form-control" name="telepon" placeholder="Telepon..." value="{{ old('telepon') ?? $data->telepon }}">
-                @error('telepon')
-                    <div class="text-danger small mt-1">{{ $message }}</div>
-                @enderror
-            </div>
+            
 
             <div class="mb-4">
                 <label class="form-label">Role</label>
-                <select class="form-select" name="roles" required>
+                <select class="form-select" name="kondisi" required>
                     <option value="">Pilih Role...</option>
-                    <option value="admin" 
-                        {{ (old('roles') ?? $data->roles) == 'admin' ? 'selected' : '' }}>
-                        Admin
+                    <option value="baik" 
+                        {{ (old('kondisi') ?? $data->kondisi) == 'baik' ? 'selected' : '' }}>
+                        Baik
                     </option>
-                    <option value="pegawai" 
-                        {{ (old('roles') ?? $data->roles) == 'pegawai' ? 'selected' : '' }}>
-                        Pegawai
+                    <option value="rusakRingan" 
+                        {{ (old('kondisi') ?? $data->kondisi) == 'rusakRingan' ? 'selected' : '' }}>
+                        Rusak Ringan
+                    </option>
+                    <option value="rusakBerat" 
+                        {{ (old('kondisi') ?? $data->kondisi) == 'rusakBerat' ? 'selected' : '' }}>
+                        Rusak Berat
                     </option>
                 </select>
                 @error('roles')
                     <div class="text-danger small mt-1">{{ $message }}</div>
                 @enderror
             </div>
+
+            <div class="mb-3">
+                <label class="form-label">Deskripsi Kondisi</label>
+                <textarea name="deskripsi_kondisi" class="form-control" rows="3">{{ old('deskripsi_kondisi') ?? $data->OpnameAset->last()->deskripsi  }}</textarea>
+                @error('deskripsi_kondisi')
+                    <div class="text-danger small mt-1">{{ $message }}</div>
+                @enderror
+            </div>  
 
             <div class="d-flex justify-content-end">
                 <button type="submit" class="btn btn-dark">Simpan</button>

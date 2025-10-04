@@ -87,13 +87,13 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="{{ route('users.update', $p->id) }}">
+                                        <a class="dropdown-item" href="{{ route('aset.update', $p->id) }}">
                                             <i class="bi bi-pencil me-2"></i>Ubah
                                         </a>
                                     </li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li>
-                                        <form action="{{ route('users.delete', $p->id) }}" method="POST" id="delete-{{ $p->id }}">
+                                        <form action="{{ route('aset.delete', $p->id) }}" method="POST" id="delete-{{ $p->id }}">
                                             @csrf
                                             @method('DELETE')
                                             <button type="button" class="dropdown-item text-danger" onclick="alertConfirm(this)" data-id="{{ $p->id }}">

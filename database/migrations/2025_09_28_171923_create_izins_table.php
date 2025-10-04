@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('izins', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('user_id')->references('id')->on('users');
+            $table->foreignUuid('user_id')->constrained('users')->onDelete('cascade');
             $table->dateTime('tanggal_mulai');
             $table->dateTime('tanggal_selesai');
             $table->text('deskripsi')->nullable();
